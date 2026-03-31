@@ -3,8 +3,6 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "momydiop/isi-burger:latest"
-        COMPOSER = "C:\\laragon\\bin\\composer\\composer.bat"
-        PHP = "C:\\laragon\\bin\\php\\php-8.3.13-nts-Win32-vs16-x64\\php.exe"
     }
 
     stages {
@@ -21,20 +19,17 @@ pipeline {
                 bat 'C:\\laragon\\bin\\php\\php-8.3.13-nts-Win32-vs16-x64\\php.exe artisan key:generate'
             }
         }
-
         stage('Build assets') {
             steps {
                 bat 'npm install'
                 bat 'npm run build'
             }
         }
-
         stage('Création image Docker') {
             steps {
                 bat "docker build -t %DOCKER_IMAGE% ."
             }
         }
-
         stage('Push Docker Hub') {
             steps {
                 withCredentials([usernamePassword(
@@ -48,7 +43,6 @@ pipeline {
             }
         }
     }
-
     post {
         success {
             echo 'Pipeline ISI Burger terminé avec succès !'

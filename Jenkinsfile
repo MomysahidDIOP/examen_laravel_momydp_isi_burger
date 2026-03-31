@@ -3,6 +3,8 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "momydiop/isi-burger:latest"
+        COMPOSER = "C:\\laragon\\bin\\composer\\composer.bat"
+        PHP = "C:\\laragon\\bin\\php\\php-8.3.13-nts-Win32-vs16-x64\\php.exe"
     }
 
     stages {
@@ -15,9 +17,9 @@ pipeline {
 
         stage('Installation des dépendances Laravel') {
             steps {
-                bat 'composer install --no-dev --optimize-autoloader'
+                bat '%COMPOSER% install --no-dev --optimize-autoloader'
                 bat 'copy .env.example .env'
-                bat 'php artisan key:generate'
+                bat '%PHP% artisan key:generate'
             }
         }
 

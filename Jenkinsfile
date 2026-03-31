@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Installation des dépendances Laravel') {
             steps {
-                bat 'set COMPOSER_BINARY=C:\\laragon\\bin\\composer\\composer.phar && C:\\laragon\\bin\\php\\php-8.3.13-nts-Win32-vs16-x64\\php.exe C:\\laragon\\bin\\composer\\composer.phar install --no-dev --optimize-autoloader'
+                bat 'C:\\laragon\\bin\\php\\php-8.3.13-nts-Win32-vs16-x64\\php.exe C:\\composer\\composer.phar install --no-dev --optimize-autoloader'
                 bat 'copy .env.example .env'
                 bat 'C:\\laragon\\bin\\php\\php-8.3.13-nts-Win32-vs16-x64\\php.exe artisan key:generate'
             }

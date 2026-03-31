@@ -14,14 +14,13 @@ pipeline {
                     url: 'https://github.com/MomysahidDIOP/examen_laravel_momydp_isi_burger.git'
             }
         }
-
-      stage('Installation des dépendances Laravel') {
-          steps {
-              bat 'C:\\laragon\\bin\\php\\php-8.3.13-nts-Win32-vs16-x64\\php.exe C:\\laragon\\bin\\composer\\composer.phar install --no-dev --optimize-autoloader'
-              bat 'copy .env.example .env'
-              bat 'C:\\laragon\\bin\\php\\php-8.3.13-nts-Win32-vs16-x64\\php.exe artisan key:generate'
-          }
-      }
+stage('Installation des dépendances Laravel') {
+    steps {
+        bat 'xcopy /E /I /Y C:\\laragon\\www\\isi_burger\\vendor vendor'
+        bat 'copy .env.example .env'
+        bat 'C:\\laragon\\bin\\php\\php-8.3.13-nts-Win32-vs16-x64\\php.exe artisan key:generate'
+    }
+}
 
         stage('Build assets') {
             steps {
